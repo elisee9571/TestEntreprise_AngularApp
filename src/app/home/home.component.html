@@ -1,0 +1,32 @@
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Email</th>
+                <th scope="col">Age</th>
+                <th scope="col">Famille</th>
+                <th scope="col">Race</th>
+                <th scope="col">Nourriture</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of userData">
+                <th scope="row">{{user.id}}</th>
+                <td>{{user.email}}</td>
+                <td>{{user.age}}</td>
+                <td>{{user.famille}}</td>
+                <td>{{user.race}}</td>
+                <td>{{user.nourriture}}</td>
+            </tr>
+            <!-- <tr>
+                <th scope="row">1</th>
+                <td>test</td>
+                <td>test</td>
+                <td>test</td>
+                <td>test</td>
+                <td>test</td>
+            </tr> -->
+        </tbody>
+    </table>
+</div>

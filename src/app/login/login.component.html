@@ -1,0 +1,17 @@
+<div class="container">
+    <H5>Login</H5>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <!-- <p>Form value: {{f.value | json}}</p>
+        <p>Form valid: {{f.valid}}</p> -->
+
+        <div class="mb-3">
+            <label for="loginEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="loginEmail" name="email" ngModel required>
+        </div>
+        <div class="mb-3">
+            <label for="loginPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="loginPassword" name="password" ngModel required>
+        </div>
+        <button [disabled]="f.invalid" type="submit" class="btn btn-primary">Sign In</button>
+    </form>
+</div>
