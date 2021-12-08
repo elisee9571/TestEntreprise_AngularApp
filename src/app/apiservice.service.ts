@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http'
 import { Observable} from 'rxjs';
 import { map} from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 
 
@@ -11,41 +12,51 @@ import { map} from 'rxjs/operators';
 export class ApiserviceService {
 
   userData: any = [];
+  
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   // connect backend
 
   apiUrl = 'http://localhost:3000/users';
 
-  // get all data
-
+  // get all userData
   getAllData(): Observable<any>{
     return this.http.get(`${this.apiUrl}`);
   }
 
+  // login user
   login(model:any){
     return this.http.post(`${this.apiUrl}/login`, model).pipe(
       map((res: any) => {
-        const user = res;
-        if(user.message = "Logged In Success"){
+        let user = res;
+        if(user.token){
           localStorage.setItem('token', user.token)
           localStorage.setItem('id', user.id)
-
+          console.log(user);
+          this.router.navigateByUrl('/profil');
         }
       })
     )
   }
 
+  // register user
   register(model:any){
-    let headers = new HttpHeaders();
-    let options = { headers: headers };
-    return this.http.post(`${this.apiUrl}/register`, model, options);
+    return this.http.post(`${this.apiUrl}/register`, model).pipe(
+      map((res: any)=>{
+        let user = res;
+        console.log(user);
+        this.router.navigateByUrl('/login');
+      })
+    );
   }
 
-  profil(id: string){
-    return this.http.get(`${this.apiUrl}/profil/${id}`).pipe(
-      map(user => user)
-    );
+  // update user
+  update(model:any, id:string){
+    return this.http.put(`${this.apiUrl}/update/${id}`, model).pipe(
+      map((res: any)=>{
+          localStorage.setItem("token", res.data.token);
+      })
+    );  
   }
 }

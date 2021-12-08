@@ -1,26 +1,29 @@
 <div class="container">
     <H5>Profil</H5>
-    <form>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" *ngIf="userData">
+        <h5>Bienvenue {{userData.email}}</h5>
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1">
+            <label for="profilemail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="profilemail" [(ngModel)]="userData.email" name="email" required>
+            <!-- name="email" ngModel -->
         </div>
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Age</label>
-            <input type="number" class="form-control" id="exampleInputPassword1">
+            <label for="profilage" class="form-label">Age</label>
+            <input type="number" class="form-control" id="profilage" [(ngModel)]="userData.age" name="age" required>
         </div>
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Famille</label>
-            <input type="text" class="form-control" id="exampleInputPassword1">
+            <label for="profilfamille" class="form-label">Famille</label>
+            <input type="text" class="form-control" id="profilfamille" [(ngModel)]="userData.famille" name="famille" required>
         </div>
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Race</label>
-            <input type="text" class="form-control" id="exampleInputPassword1">
+            <label for="profilerace" class="form-label">Race</label>
+            <input type="text" class="form-control" id="profilerace" [(ngModel)]="userData.race" name="race" required>
         </div>
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Nourriture</label>
-            <input type="text" class="form-control" id="exampleInputPassword1">
+            <label for="profilnourriture" class="form-label">Nourriture</label>
+            <input type="text" class="form-control" id="profilnourriture" [(ngModel)]="userData.nourriture" name="nourriture" required>
         </div>
-        <button type="submit" class="btn btn-primary">Edit</button>
+        <button [disabled]="f.invalid" type="submit" class="btn btn-primary">Edit</button>
+        <button class="log-out btn btn-danger" (click)="logout()">Log out</button>
     </form>
 </div>

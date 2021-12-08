@@ -14,8 +14,12 @@ import { RegisterComponent } from './register/register.component';
 import { ProfilComponent } from './profil/profil.component';
 
 const routes: Routes = [{
-  path: '',
+  path: 'home',
   component:HomeComponent
+},{ 
+  path: '',   
+  redirectTo: '/home', 
+  pathMatch: 'full' 
 },{
   path:"login",
   component:LoginComponent
@@ -23,7 +27,7 @@ const routes: Routes = [{
   path:"register",
   component:RegisterComponent
 },{
-  path:"profil/:id",
+  path:"profil",
   component:ProfilComponent
 }]
 

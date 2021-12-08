@@ -14,14 +14,19 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // register user
   onSubmit(f: NgForm){
-    const registerObserver = {
-      next: x => console.log('User Created'),
-      error: err => console.log(err)  
-    };
-
-    this.service.register(f.value).subscribe(registerObserver);
-    
+    this.service.register(f.value).subscribe(()=>{
+      const registerObserver = {
+        next: x => console.log('User Created'),
+        error: err => console.log(err)  
+      };
+      if(registerObserver.next){
+        console.log(registerObserver.next);
+      } else{
+        console.log(registerObserver.error);
+      }
+    })    
   }
 
 }
